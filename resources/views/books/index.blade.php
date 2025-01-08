@@ -2,6 +2,17 @@
 
 @section('content')
     <div class="container">
+
+          <div class="container">
+                <!-- Boutons de navigation vers Catégories et Auteurs -->
+                <div style="margin-bottom: 20px;">
+                    <a href="{{ route('categories.index') }}" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">
+                        Voir les Catégories
+                    </a>
+                    <a href="{{ route('authors.index') }}" style="padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">
+                        Voir les Auteurs
+                    </a>
+                </div>
         <h1>Liste des livres</h1>
 
         @if (session('success'))

@@ -83,4 +83,3 @@
 
         <a href="{{ route('books.index') }}">Retour à la liste</a>
     </div>
-@endsection
