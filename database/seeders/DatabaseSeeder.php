@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Author;
+use App\Models\Category;
+use App\Models\Book;
+use App\Models\Review;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,14 +16,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Créer des utilisateurs (si ce n'est pas déjà fait)
+        User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Créer des auteurs
+        Author::factory(10)->create();
 
-            \App\Models\Book::factory(10)->create();
+        // Créer des catégories
+        Category::factory(5)->create();
 
+        // Créer des livres et les associer à des auteurs et catégories
+        Book::factory(20)->create()->each(function ($book) {
+            // Associer 1 à 3 catégories aléatoires
+            $book->categories()->attach(
+                Category::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray()
+            );
+        });
+
+        // Créer des reviews
+        Review::factory(50)->create();
     }
 }
