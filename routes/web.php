@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LecteurController;
 use Illuminate\Support\Facades\Route;
 
 // Page d'accueil
@@ -36,6 +37,17 @@ Route::middleware('auth')->group(function () {
     // Routes pour les reviews (création uniquement via le formulaire sur la page du livre)
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });
+// Routes protégées par authentification
+
+Route::middleware('auth')->group(function () {
+    // Route pour afficher le formulaire de création
+    Route::get('/lecteurs/create', [LecteurController::class, 'create'])->name('lecteurs.create');
+    Route::get('/lecteurs/{lecteur}', [LecteurController::class, 'show'])->name('lecteurs.show');
+    Route::get('/lecteurs', [LecteurController::class, 'index'])->name('lecteurs.index');
+    // Route pour soumettre le formulaire
+    Route::post('/lecteurs', [LecteurController::class, 'store'])->name('lecteurs.store');
+});
+
 
 // Inclusion des routes d’authentification générées par Laravel (Breeze, Jetstream, etc.)
 require __DIR__.'/auth.php';

@@ -10,6 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    <!-- Bouton pour ajouter un lecteur -->
+                    <a href="{{ route('lecteurs.create') }}" class="inline-block mt-4 px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-700">
+                        Ajouter un Lecteur
+                    </a>
                 </div>
             </div>
         </div>
